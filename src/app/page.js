@@ -32,6 +32,11 @@ export default function Home() {
       </div>
 
       <div className={styles.center}>
+        <h1 className="text-6xl font-heading">Hello there! Welcome to Gnosis</h1>
+
+      </div>
+
+      <div className={styles.center}>
         <Image
           className={styles.logo}
           src="/next.svg"
