@@ -1,4 +1,6 @@
 import './globals.css'
+import styles from './page.module.css'
+import NavBar from '../components/UI/NavBar'
 
 export const metadata = {
   title: 'Create Next App',
@@ -10,10 +12,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <div
-          style={{
-            backgroundColor: "#EBE8DD",
-            color: "#274E3F",
-          }}
         >
           {children}
         </div>

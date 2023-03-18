@@ -7,14 +7,16 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      gold: "#b29155",
-      purple: "#E0B0FF",
-      black: "#151515",
-      grey: "#282828",
-      white: "#ffffff",
-      red: "#ff0033",
-      green: "#198754",
+    extend: {
+      colors: {
+        gold: "#b29155",
+        purple: "#E0B0FF",
+        black: "#151515",
+        grey: "#282828",
+        white: "#ffffff",
+        red: "#ff0033",
+        green: "#198754",
+      }
     },
     fontFamily: {
       heading: ["Unbounded", "monospace"],
