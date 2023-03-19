@@ -17,5 +17,6 @@ async function main() {
 
 main().catch((error) => {
   console.error(error, "Error encountered");
+  fs.appendFile("contractAddresses.txt", "\n");
   process.exitCode = 1;
 });

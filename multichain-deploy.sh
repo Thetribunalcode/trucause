@@ -7,6 +7,7 @@ NC='\033[0m' # No Color
 
 # list of networks
 listOfNetworks=("filecoinHyperspace" "gnosis" "scroll" "optimism")
+# listOfNetworks=("filecoinHyperspace" "gnosis")
 
 # remove file if it already exists
 if [ -e 'contractAddresses.txt' ]
@@ -31,6 +32,7 @@ touch contractAddresses.txt
 # calling deploy script for each subcontract
 printf "${GREEN}Deploying ${NC}subcontracts\n"
 for i in "${listOfNetworks[@]}"; do
+  printf "${i}:" >> contractAddresses.txt  
   npx hardhat run scripts/deploy.subContracts.js --network "$i" > /dev/null 2> "logs/${i}.log"
   if [ $? = 0 ]
   then
@@ -39,3 +41,13 @@ for i in "${listOfNetworks[@]}"; do
     echo "$i ❌"
   fi
 done
+
+# calling deploy script for maincontract with these addresses
+printf "${GREEN}Deploying ${NC}maincontract\n"
+npx hardhat run scripts/deploy.NetworkMapper.js --network mumbai  2> "logs/mumbai.log"
+if [ $? = 0 ]
+then
+  echo "Main contract on mumbai ✅"
+else
+  echo "Main contract on mumbai ❌"
+fi

@@ -37,8 +37,8 @@
       ]
     },
     "/home/vaithee/Desktop/trucause/contracts/NetworkMapper.sol": {
-      "lastModificationDate": 1679241079904,
-      "contentHash": "ecca24d63bf21ecddde9e12bb25d4946",
+      "lastModificationDate": 1679253536576,
+      "contentHash": "de2445b8cd4570dbf9dcbde28e58fa97",
       "sourceName": "contracts/NetworkMapper.sol",
       "solcConfig": {
         "version": "0.8.18",
