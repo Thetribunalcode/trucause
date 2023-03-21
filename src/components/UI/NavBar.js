@@ -1,36 +1,57 @@
+"use client";
+
 import Image from "next/image";
 import "../../app/globals.css";
 import styles from "../../app/page.module.css";
+import { useState, useEffect } from "react";
+
 
 export default function NavBar() {
+
+  const [scrollY, setScrollY] = useState(0);
+
+  function handleScroll() {
+    setScrollY(window.pageYOffset);
+    console.log(scrollY);
+  }
+
+  useEffect(() => {
+    function watchScroll() {
+      window.addEventListener("scroll", handleScroll);
+    }
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+
   return (
     <>
-      <nav className='w-full fixed z-40 '>
-        <div className='flex flex-row justify-between items-center mx-auto px-2 my-0'>
+      <header className={ `w-full fixed flex justify-between ${scrollY > 60 ? 'bg-black transition duration-300 ease-in-out' : 'transition duration-300 ease-in-out' } items-center px-4 md:px-12 h-24 z-40` }>
           <a
             href='#'
             className='flex items-center'>
             <Image
-              width={150}
-              height={50}
+              width={200}
+              height={500}
               src='/png/logo-white-1.png'
               alt='trucause Logo'
             />
           </a>
-          <div className='flex mr-10 items-center text-slate-50 font-light text-2xl '>
+          <div className='flex mr-10 items-center text-slate-50 font-light text-xl '>
             <a
               href='#'
-              className='mr-6  hover:text-black'>
+              className='mr-6  hover:text-slate'>
               About
             </a>
             <a
               href='#'
-              className=' hover:text-black'>
+              className=' hover:text-slate'>
               Login
             </a>
           </div>
-        </div>
-      </nav>
+      </header>
     </>
   );
 }
