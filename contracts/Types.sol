@@ -2,7 +2,7 @@
 pragma solidity ^0.8.17;
 
 import {MarketTypes} from "@zondax/filecoin-solidity/contracts/v0.8/types/MarketTypes.sol";
-import {CBOR} from "@zondax/filecoin-solidity/contracts/v0.8/cbor/FilecoinCbor.sol";
+import {CBOR} from "@zondax/filecoin-solidity/contracts/v0.8/external/CBOR.sol";
 import {FilecoinCBOR} from "@zondax/filecoin-solidity/contracts/v0.8/cbor/FilecoinCbor.sol";
 import {CBORDecoder} from "@zondax/filecoin-solidity/contracts/v0.8/utils/CborDecode.sol";
 import {CommonTypes} from "@zondax/filecoin-solidity/contracts/v0.8/types/CommonTypes.sol";

@@ -2,8 +2,16 @@ require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config({ path: __dirname + '/.env.local' })
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.18",
-  defaultNetwork: "mumbai",
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.18",
+      },
+      {
+        version: "0.8.17",
+      },
+    ]
+  }, defaultNetwork: "mumbai",
   networks: {
     hardhat: {},
     mumbai: {

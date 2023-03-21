@@ -1,4 +1,1 @@
-filecoinHyperspace:0xfbCE2d5647a7Bb4a294eB083926cA332b7e6A498
-gnosis:0x5Ea910ce73A32f8DC961cdD218E53Ab640a434ae
-scroll:0xE92e49c553605966c0f8Eb38e01e60999b7aEEE3
-optimism:
+filecoinHyperspace:gnosis:scroll:optimism:
