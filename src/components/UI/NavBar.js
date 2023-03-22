@@ -28,7 +28,7 @@ export default function NavBar() {
 
   return (
     <>
-      <header className={ `w-full fixed flex justify-between ${scrollY > 60 ? 'bg-black transition duration-300 ease-in-out' : 'transition duration-300 ease-in-out' } items-center px-4 md:px-12 h-24 z-40` }>
+      <header className={ `w-full fixed flex justify-between ${scrollY > 60 ? 'bg-black transition duration-300 ease-in-out' : 'transition duration-300 ease-in-out' } items-center h-24 z-40` }>
           <a
             href='#'
             className='flex items-center'>
