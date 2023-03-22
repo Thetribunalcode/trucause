@@ -15,7 +15,7 @@ module.exports = {
   networks: {
     hardhat: {},
     mumbai: {
-      url: "https://endpoints.omniatech.io/v1/matic/mumbai/public",
+      url: "https://polygon-testnet.public.blastapi.io",
       accounts: [process.env.NEXT_PUBLIC_PRIVATEKEY]
     },
     filecoinHyperspace: {

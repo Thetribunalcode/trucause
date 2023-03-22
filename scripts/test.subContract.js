@@ -8,7 +8,7 @@ async function main() {
 
   const addressText = `${subContractInstance.address}\n`;
 
-  fs.appendFile("contractAddresses.txt", addressText, err => { console.log(err) })
+  fs.writeFile("contractAddresses.txt", addressText, err => { console.log(err) })
 
 }
 

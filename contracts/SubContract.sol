@@ -3,14 +3,12 @@ pragma solidity ^0.8.9;
 
 import {HyperlaneConnectionClient} from "@hyperlane-xyz/core/contracts/HyperlaneConnectionClient.sol";
 
-contract NetworkMapper is HyperlaneConnectionClient {
+contract SubContract is HyperlaneConnectionClient {
     // events that NGOs have can be of two types
     enum typeOfEvent {
         shortTermEvent, // 1 or 2 day event
         longTermEvent // usually week or month long
     }
-
-    mapping(address => mapping(uint16 => uint8)) listOfVolunteerHashes; // each volunteer (address), for a particular event is assigned a hash
 
     // the activity structure that stores metadata about each event
     struct activity {
