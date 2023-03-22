@@ -5,10 +5,12 @@ module.exports = {
     ".src/app/**/*.{js,ts,jsx,tsx}",
     "./src/app/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       colors: {
+        amber: "#EE610A",
         gold: "#b29155",
         purple: "#E0B0FF",
         black: "#151515",

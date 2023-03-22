@@ -1,18 +1,22 @@
 "use client";
 
-import './globals.css'
 // <------------- rainbow kit imports ------------->
 import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
   RainbowKitProvider,
-  darkTheme
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
 
+// <------------- rainbow kit imports ------------->
+
+
 // <-------------  setting up rainbow kit ------------->
+
+
+
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum],
   [
@@ -30,18 +34,21 @@ const wagmiClient = createClient({
   provider
 })
 
-export default function RootLayout({ children }) {
+
+// <-------------  setting up rainbow kit ------------->
+
+import Landing from "../components/Pages/Landing";
+import NavBar from "../components/UI/NavBar";
+import Login from '../components/Pages/Login'
+import "./globals.css";
+
+
+export default function Home() {
   return (
-
-    <html lang="en">
-      <body>
-        <WagmiConfig client={wagmiClient}>
-          <RainbowKitProvider coolMode chains={chains} theme={darkTheme({ accentColor: '#E09F1A', borderRadius: 'large', fontStack: 'system' })}>
-            {children}
-          </RainbowKitProvider>
-        </WagmiConfig>
-      </body>
-    </html >
-
-  )
+    <WagmiConfig client={wagmiClient}>
+      <RainbowKitProvider chains={chains}>
+        <Landing />
+      </RainbowKitProvider>
+    </WagmiConfig>
+  );
 }

@@ -6,7 +6,6 @@ import Image from "next/image";
 export default function Landing() {
   return (
     <>
-      <NavBar />
       <section className="scroll-smooth" id='intro'>
         <div className='hero flex-row relative flex items-center justify-center h-screen overflow-hidden'>
           <div className='absolute top-0 left-0 h-full w-full'>
@@ -29,7 +28,6 @@ export default function Landing() {
         </div>
       </section>
 
-      <Login />
     </>
   );
 }
