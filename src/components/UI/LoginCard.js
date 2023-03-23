@@ -7,7 +7,7 @@ export default function Login(props) {
 
   const [type, setType] = useState("volunteer");
 
-  const selectedTypeStyles = "p-4 m-2 text-white text-xl rounded w-full ";
+  const selectedTypeStyles = "p-4 m-2 text-white text-xl rounded w-full transition duration-500 ease-in-out  ";
 
   const { address, isConnected } = useAccount();
 
