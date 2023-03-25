@@ -1,7 +1,4 @@
-import NavBar from "../UI/NavBar";
-import Login from "./Login";
 import "../../app/globals.css";
-import Image from "next/image";
 
 export default function Landing() {
   return (

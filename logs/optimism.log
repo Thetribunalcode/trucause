@@ -1,15 +1,20 @@
-Error HH606: The project cannot be compiled, see reasons below.
-
-The Solidity version pragma statement in these files doesn't match any of the configured compilers in your config. Change the pragma or configure additional compiler versions in your hardhat config.
-
-  * @zondax/solidity-bignumber/src/BigNumbers.sol (0.8.17)
-
-These files and its dependencies cannot be compiled with your config. This can happen because they have incompatible Solidity pragmas, or don't match any of your configured Solidity compilers.
-
-  * contracts/DealClient.sol
-
-To learn more, run the command again with --verbose
-
-Read about compiler configuration at https://hardhat.org/config
-
-For more info go to https://hardhat.org/HH606 or run Hardhat with --show-stack-traces
+Error: nonce has already been used [ See: https://links.ethers.org/v5-errors-NONCE_EXPIRED ] (error={"name":"ProviderError","_stack":"ProviderError: nonce too low\n    at HttpProvider.request (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:88:21)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at EthersProviderWrapper.send (/home/vaithee/Desktop/trucause/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20)","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=NONCE_EXPIRED, version=providers/5.7.2)
+    at Logger.makeError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/logger/src.ts/index.ts:269:28)
+    at Logger.throwError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/logger/src.ts/index.ts:281:20)
+    at checkError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:105:16)
+    at /home/vaithee/Desktop/trucause/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:265:24
+    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
+  reason: 'nonce has already been used',
+  code: 'NONCE_EXPIRED',
+  error: ProviderError: nonce too low
+      at HttpProvider.request (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:88:21)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/vaithee/Desktop/trucause/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined
+} Error encountered
+TypeError: Callback must be a function. Received undefined
+    at maybeCallback (node:fs:181:3)
+    at Object.appendFile (node:fs:2230:14)
+    at /home/vaithee/Desktop/trucause/scripts/deploy.subContracts.js:17:6
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

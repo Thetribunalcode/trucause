@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-export default function Login(props) {
+export default function Login() {
 
   const [type, setType] = useState("volunteer");
 
@@ -11,17 +11,33 @@ export default function Login(props) {
 
   const { address, isConnected } = useAccount();
 
+  const [account, setAccount] = useState({
+    address: "0x0",
+    type: "volunteer",
+    network: "ethereum"
+  });;
+
+  // const contractAddress = "0x4801A47dC417FeAC8B557BF785D7e46Bd00D24c5"
+  // const provider = getProviderForNetwork("mumbai");
+  // const contractInstance = contractInstanceReturner(contractAddress, provider);
+
   useEffect(() => {
-    if (isConnected && address) {
-      // Modify dashboard component and put that route here
-      props.setAccount({
-        address: address,
-        type: type,
-        network: "ethereum"
-      });
+    if (isConnected && account) {
+      console.log(account)
+      // If wallet is already connected, push them to dashboard
     }
+  }, [account]);
+
+  const handleProceed = () => {
+    authenticateUserForType()
+    console.log("You have been verified!")
+    setAccount({
+      address: address,
+      type: type,
+      network: "ethereum"
+    });
     console.log(type)
-  }, []);
+  }
 
   return (
     <div className="flex flex-col justify-center space-y-8 items-center text-white">
@@ -39,8 +55,8 @@ export default function Login(props) {
                 id="bordered-radio-1"
                 value="volunteer"
                 name="type"
-                onClick={(e) => {
-                  setType(e.target.value);
+                onClick={() => {
+                  setType("volunteer");
                 }}
                 className={selectedTypeStyles + (type === "volunteer" ? "bg-amber-500" : null)}
               >
@@ -51,8 +67,8 @@ export default function Login(props) {
                 id="bordered-radio-1"
                 value="ngo"
                 name="type"
-                onClick={(e) => {
-                  setType(e.target.value);
+                onClick={() => {
+                  setType("ngo");
                 }}
                 className={selectedTypeStyles + (type === "ngo" ? "bg-amber-500" : null)}
               >
@@ -60,6 +76,15 @@ export default function Login(props) {
               </button>
             </div>
             <ConnectButton accountStatus="address" chainStatus="name" />
+            {address && isConnected &&
+              <button id="bordered-radio-1"
+                onClick={handleProceed}
+                className={selectedTypeStyles + (type === "ngo" ? "bg-amber-500" : null)}
+              >
+                Proceed
+              </button>
+
+            }
           </div>
         </div>
       </div>

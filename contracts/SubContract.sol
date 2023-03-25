@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 import {HyperlaneConnectionClient} from "@hyperlane-xyz/core/contracts/HyperlaneConnectionClient.sol";
 
-contract NetworkMapper is HyperlaneConnectionClient {
+contract SubContract is HyperlaneConnectionClient {
     // events that NGOs have can be of two types
     enum typeOfEvent {
         shortTermEvent, // 1 or 2 day event
@@ -29,7 +29,7 @@ contract NetworkMapper is HyperlaneConnectionClient {
         activity[] activities;
     }
 
-    mapping(address => NGODetails) listOfNGOs; // each NGO (owner address) is mapped to their own metadata and list of events
+    mapping(address => NGODetails) public listOfNGOs; // each NGO (owner address) is mapped to their own metadata and list of events
 
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
         return bytes32(uint256(uint160(_addr)));

@@ -1,5 +1,6 @@
 const { ethers } = require("ethers");
-const path = require("path")
+const path = require("path");
+const fs = require("fs");
 const { networks, rpcUrls } = require("./networks");
 const envpath = path.join(__dirname + "/.." + '/.env.local');
 require('dotenv').config({ path: envpath })

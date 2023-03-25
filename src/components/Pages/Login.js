@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import LoginCard from "../UI/LoginCard";
 
-export default function Login(props) {
+export default function Login() {
   return (
     <>
       <section
@@ -17,7 +17,7 @@ export default function Login(props) {
           />
         </div>
         <div className='login-group p-10 ml-10'>
-          <LoginCard setAccount={props.setAccount} />
+          <LoginCard />
         </div>
       </section>
     </>

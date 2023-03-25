@@ -3,11 +3,8 @@ const fs = require("fs");
 
 async function main() {
 
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
-  const lockedAmount = hre.ethers.utils.parseEther("0.001");
-  const subContract = await hre.ethers.getContractFactory("Lock");
-  const subContractInstance = await subContract.deploy(unlockTime, { value: lockedAmount });
+  const subContract = await hre.ethers.getContractFactory("SubContract");
+  const subContractInstance = await subContract.deploy();
 
   const addressText = `${subContractInstance.address}\n`;
 

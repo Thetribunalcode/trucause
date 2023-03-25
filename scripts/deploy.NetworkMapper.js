@@ -20,6 +20,9 @@ async function main() {
   const networkMapperInstance = await NetworkMapper.deploy(lines);
   await networkMapperInstance.deployed();
   console.log(`Contract NetworkMapper.sol deployed to ${networkMapperInstance.address}, contains addresses of other contracts on each chain`);
+
+  const addressText = `mumbai:${networkMapperInstance.address}\n`;
+  fs.appendFile("contractAddresses.txt", addressText, err => { console.log(err) })
 }
 
 main().catch((error) => {

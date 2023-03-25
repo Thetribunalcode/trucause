@@ -23,4 +23,6 @@ const rpcUrls = {
   filecoinHyperspace: 'https://api.hyperspace.node.glif.io/rpc/v1',
 }
 
-module.exports = { networks, rpcUrls };
+export async function GET(request) {
+  return new Response({ networks: networks, rpcUrls: rpcUrls })
+}
