@@ -17,6 +17,7 @@ const setSubContractAddressInNetwork = (contractInstance, network, address) => {
 
 const authenticateNGOAgainstNetwork = async (contractInstance, network, address) => {
   const networkReturned = await contractInstance.NGOToNetworkMapping(address);
+  console.log("networkReturned", networkReturned)
   if (network === networkReturned)
     return true
   else
@@ -25,6 +26,7 @@ const authenticateNGOAgainstNetwork = async (contractInstance, network, address)
 
 const authenticateUser = async (contractInstance, address) => {
   const userMetadataReturned = await contractInstance.userMapping(address);
+  console.log("userMetadataReturned", userMetadataReturned)
   if (userMetadataReturned.name !== "")
     return true
   else
