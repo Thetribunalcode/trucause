@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterOnboard from "../../components/Pages/RegisterOnboard"
+import RegisterOnboard from "../../../components/Pages/RegisterNgo"
 import Image from "next/image";
 
 export default function Page() {

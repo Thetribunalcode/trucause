@@ -15,7 +15,7 @@ export default function Datepicker(props) {
         {props.time}
       </div>
       <DemoContainer components={["DatePicker"]}>
-        <DatePicker />
+        { (props.disabled === 'disabled') ? <DatePicker disabled/> : <DatePicker />}
       </DemoContainer>
     </>
   );
