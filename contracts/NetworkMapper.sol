@@ -8,6 +8,8 @@ contract NetworkMapper is Ownable {
 
     mapping(address => string) public NGOToNetworkMapping; // maps each NGO to a particular network, used to authenticate and route the NGO to their chain-specific contract
 
+    // location parameter for both ngo and user to match
+
     struct userMetadata {
         string name;
         uint256 balance;

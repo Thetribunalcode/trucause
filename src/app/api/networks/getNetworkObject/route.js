@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import { NextResponse } from 'next/server';
 
 // network information
 const mumbai = ethers.providers.getNetwork(80001);
@@ -14,13 +15,9 @@ const networks = {
   optimism: optimism,
   filecoinHyperspace: filecoinHyperspace
 }
-// json-rpc urls
-const rpcUrls = {
-  mumbai: 'https://polygon-mumbai.blockpi.network/v1/rpc/public',
-  scroll: 'https://alpha-rpc.scroll.io/l2',
-  gnosis: 'https://rpc.gnosischain.com',
-  optimism: 'https://endpoints.omniatech.io/v1/op/goerli/public',
-  filecoinHyperspace: 'https://api.hyperspace.node.glif.io/rpc/v1',
-}
 
-module.exports = { networks, rpcUrls };
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const network = searchParams.get('network');
+  return NextResponse.json(networks[`${network}`])
+}
