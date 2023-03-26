@@ -50,9 +50,10 @@ contract NetworkMapper is Ownable {
         contractAddresses["optimism"] = _contractAddresses[3];
     }
 
-    function getNewNetwork() public returns (networks) {
-        networks currentNetwork = lastNetAssigned;
-        if (uint256(currentNetwork) == 3) {
+    function getNewNetwork () public returns (networks){
+        networks currentNetwork =  lastNetAssigned;
+        if ( uint(currentNetwork) == 3 )
+        {
             lastNetAssigned = (networks.filecoinHyperspace);
         } else {
             lastNetAssigned = networks((uint256(lastNetAssigned)) + 1);
