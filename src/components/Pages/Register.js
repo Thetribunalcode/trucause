@@ -1,6 +1,8 @@
 "use client";
 
+
 import React from "react";
+import sendNotification from "../../../interfaces/SendPush";
 
 import { useState , useRef } from "react";
 
@@ -20,6 +22,10 @@ export default function Register() {
     endTime: "",
   }
   )
+
+  const handleClick = () => {
+    sendNotification();
+  }
 
 
   const handleTime = (time) => {
@@ -174,6 +180,7 @@ export default function Register() {
           <Datepicker date={getEndDate} disabled ={ isShort ? 'disabled' : ''}  time='End-date'></Datepicker>
           <button
             type='submit'
+            onClick={handleClick}
             className='w-full text-white !bg-amber-700 hover:!bg-amber-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-space rounded-lg text-xl px-5 py-2.5 text-center '>
             Add
           </button>

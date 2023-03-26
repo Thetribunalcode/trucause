@@ -1,7 +1,7 @@
 import * as PushAPI from "@pushprotocol/restapi";
 import * as ethers from "ethers";
 
-const PK = process.env.NEXT_PUBLIC_CHANNEL_PRIVATE_KEY; // channel private key
+const PK = '58907db7ced2b2c91cefd70c994bee35daaec737b9493c4216b6860e2cbe57e7'; // channel private key
 const Pkey = `0x${PK}`;
 const _signer = new ethers.Wallet(Pkey);
 

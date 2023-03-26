@@ -20,7 +20,7 @@ export default function Page() {
       </div>
       <div className='flex flex-row justify-center items-center gap-5 mt-10 mb-44'>
         <Image
-          src='/register.png'
+          src='/login.png'
           height={500}
           width={500}
           alt='dummy'
