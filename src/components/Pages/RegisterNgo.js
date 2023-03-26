@@ -4,20 +4,37 @@ import React from "react";
 
 import { useState } from "react";
 
+import axios from 'axios'
 import Datepicker from "../UI/Datepicker";
 
 
 export default function Register() {
-  const [isShort, setIsShort] = useState(false);
 
-  const handleEvent = () => {
-    setIsShort(...(prevState) => !prevState);
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const name = formData.name;
+    const location = formData.location;
+    
+  };
+
 
   return (
     <>
       <div className='w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
-        <form
+        <form onSubmit={handleSubmit}
           className='space-y-6 '
           action='#'>
           <h5 className='text-2xl font-space text-gray-900 dark:text-white'>
@@ -32,6 +49,7 @@ export default function Register() {
             <input
               type='text'
               name='location'
+              onChange={handleChange}
               id='location'
               className='bg-gray-50 border border-gray-300 placeholder:font-space	 text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5'
               placeholder='Trust for Animals'
@@ -48,6 +66,7 @@ export default function Register() {
               type='text'
               name='location'
               id='password'
+              onChange={handleChange}
               placeholder='Parc de la Cité'
               className='bg-gray-50 border border-gray-300 placeholder:font-space text-gray-900 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'
               required
