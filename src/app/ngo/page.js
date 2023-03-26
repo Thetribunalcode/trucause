@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import LandingCard from "@/components/UI/LandingCard";
+import GoBackButton from "@/components/UI/GoBackButton";
 export default function page() {
   return (
     <>
