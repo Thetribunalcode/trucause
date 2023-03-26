@@ -13,20 +13,48 @@ contract SubContract is HyperlaneConnectionClient {
     mapping(address => mapping(uint16 => uint8)) listOfVolunteerHashes; // each volunteer (address), for a particular event is assigned a hash
 
     // the activity structure that stores metadata about each event
-    struct activity {
+    struct short_activity {
         string name; // name of the event
-        string startDate; // start date of the event
-        string endDate; // end date of the event
+        string location;
         uint256 shiftStartTime; // when the shift starts, volunteer clocks in
         uint256 shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
-        uint256 shiftBufferTime; // the shift can be started or ended by volunteer in this buffer window, + or - the start and end time respectively
-        address[] listOfRegisteredVolunteers;
+    }
+
+    struct long_activity {
+        string name; // name of the event
+        string location;
+        uint256 shiftStartTime; // when the shift starts, volunteer clocks in
+        uint256 shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
+        string startDate;
+        string endDate;
+    }
+
+    long_activity[] long_act;
+    short_activity[] short_act;
+
+    function addShortActivity( string memory name, uint256 shiftStartTime , uint256 shiftEndTime , string memory location ) public {          
+            short_act.push(short_activity(name, location, shiftStartTime , shiftEndTime));
+    }
+    
+    function getShortActivities() public view returns(short_activity[] memory) {
+        // check if candidate exists
+        return ( short_act );
+    }
+
+    function addLongActivity( string memory name, uint256 shiftStartTime , uint256 shiftEndTime , string memory location , string memory startDate , string memory endDate ) public {          
+            long_act.push(long_activity(name, location, shiftStartTime , shiftEndTime , startDate , endDate));
+    }
+
+    function getLongActivities() public view returns(long_activity[] memory) {
+        // check if candidate exists
+        return ( long_act );
     }
 
     // each NGO has some metadata, like the owner address and the list of activities they have
     struct NGODetails {
         string name;
-        activity[] activities;
+        short_activity[] short_activities;
+        long_activity[] long_activities;
     }
 
     mapping(address => NGODetails) public listOfNGOs; // each NGO (owner address) is mapped to their own metadata and list of events

@@ -1,20 +1,11 @@
-Error: nonce has already been used [ See: https://links.ethers.org/v5-errors-NONCE_EXPIRED ] (error={"name":"ProviderError","_stack":"ProviderError: nonce too low\n    at HttpProvider.request (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:88:21)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)\n    at EthersProviderWrapper.send (/home/vaithee/Desktop/trucause/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20)","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=NONCE_EXPIRED, version=providers/5.7.2)
-    at Logger.makeError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/logger/src.ts/index.ts:269:28)
-    at Logger.throwError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/logger/src.ts/index.ts:281:20)
-    at checkError (/home/vaithee/Desktop/trucause/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:105:16)
-    at /home/vaithee/Desktop/trucause/node_modules/@ethersproject/providers/src.ts/json-rpc-provider.ts:265:24
-    at processTicksAndRejections (node:internal/process/task_queues:96:5) {
-  reason: 'nonce has already been used',
-  code: 'NONCE_EXPIRED',
-  error: ProviderError: nonce too low
-      at HttpProvider.request (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:88:21)
-      at processTicksAndRejections (node:internal/process/task_queues:96:5)
-      at EthersProviderWrapper.send (/home/vaithee/Desktop/trucause/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
-  method: 'sendTransaction',
-  transaction: undefined
-} Error encountered
-TypeError: Callback must be a function. Received undefined
-    at maybeCallback (node:fs:181:3)
-    at Object.appendFile (node:fs:2230:14)
-    at /home/vaithee/Desktop/trucause/scripts/deploy.subContracts.js:17:6
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+HardhatError: HH110: Invalid JSON-RPC response received: {"message":"Internal Server Error"}
+    at parseJsonResponse (C:\Users\ullas\trucause\node_modules\hardhat\src\internal\util\jsonrpc.ts:47:11)
+    at HttpProvider._fetchJsonRpcResponse (C:\Users\ullas\trucause\node_modules\hardhat\src\internal\core\providers\http.ts:218:31)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at HttpProvider.request (C:\Users\ullas\trucause\node_modules\hardhat\src\internal\core\providers\http.ts:85:29)
+    at EthersProviderWrapper.send (C:\Users\ullas\trucause\node_modules\@nomiclabs\hardhat-ethers\src\internal\ethers-provider-wrapper.ts:13:20) Error encountered
+TypeError: The "cb" argument must be of type function. Received undefined
+    at maybeCallback (node:fs:186:3)
+    at Object.appendFile (node:fs:2249:14)
+    at C:\Users\ullas\trucause\scripts\deploy.subContracts.js:17:6
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)

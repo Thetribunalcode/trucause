@@ -30,14 +30,16 @@ export default function Login(props) {
   }, [account]);
 
   const handleProceed = () => {
-    authenticateUserForType()
-    console.log("You have been verified!")
     setAccount({
       address: address,
       type: type,
       network: "ethereum"
     });
-    console.log(type)
+    if (type === "volunteer") {
+      router.push("/volunteer")
+    } else if (type === "ngo") {
+      router.push("/ngo")
+    }
   }
 
   return (
@@ -86,7 +88,7 @@ export default function Login(props) {
             {address && isConnected &&
               <button id="bordered-radio-1"
                 onClick={handleProceed}
-                className={selectedTypeStyles + (type === "ngo" ? "bg-amber-500" : null)}
+                className={selectedTypeStyles + (type === "ngo" ? "bg-amber-500" : "bg-purple-500")}
               >
                 Proceed
               </button>
