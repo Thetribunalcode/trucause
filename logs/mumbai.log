@@ -1,6 +1,0 @@
-HardhatError: HH110: Invalid JSON-RPC response received: {"message":"Internal Server Error"}
-    at parseJsonResponse (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/util/jsonrpc.ts:47:11)
-    at HttpProvider._fetchJsonRpcResponse (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:218:31)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at HttpProvider.request (/home/vaithee/Desktop/trucause/node_modules/hardhat/src/internal/core/providers/http.ts:85:29)
-    at EthersProviderWrapper.send (/home/vaithee/Desktop/trucause/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20)
