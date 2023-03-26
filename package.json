@@ -15,6 +15,7 @@
     "@mui/material": "^5.11.14",
     "@mui/x-date-pickers": "^6.0.3",
     "@openzeppelin/contracts": "^4.8.2",
+    "@pushprotocol/restapi": "^0.9.0",
     "@rainbow-me/rainbowkit": "^0.12.2",
     "@zondax/filecoin-solidity": "^2.0.0-beta.1",
     "date-fns": "^2.29.3",
