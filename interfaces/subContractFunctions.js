@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import SubContractJson from "../artifacts/contracts/Lock.sol/Lock.json";
+import SubContractJson from "../artifacts/contracts/SubContract.sol/SubContract.json";
 
 const { abi } = SubContractJson;
 
