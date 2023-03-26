@@ -1,7 +1,5 @@
 import { Writable } from 'stream';
-
 import formidable from 'formidable';
-import { NextApiRequest, NextApiResponse, PageConfig } from 'next';
 import { NextResponse } from 'next/server';
 
 const formidableConfig = {
@@ -40,21 +38,47 @@ const fileConsumer = (acc) => {
   return writable;
 };
 
+// function to pin to IPFS using pinata, returns hashes
+const pinFileToIPFS = async (fileObj) => {
+  const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
+  //making axios POST request to Pinata
+  try {
+    const resFile = await axios.post(url, fileObj, {
+      headers: {
+        'pinata_api_key': pinataConfig.API_KEY,
+        'pinata_secret_api_key': pinataConfig.API_SECRET,
+        'Content-Type': "multipart/form-data"
+      }
+    });
+    const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
+    return (ImgHash);
+  }
+  catch (err) {
+    return (err);
+  }
+};
+
 export async function POST(request) {
   try {
     const chunks = [];
-
     const { fields, files } = await formidablePromise(req, {
       ...formidableConfig,
       // consume this, otherwise formidable tries to save the file to disk
       fileWriteStreamHandler: () => fileConsumer(chunks),
     });
-
     // do something with the files
     const contents = Buffer.from(chunks); // or I think it is .concat(chunks)
-    return NextResponse.json({ status: "Success" });
+    const ipfsHash = await pinFileToIPFS(contents)
+    return NextResponse.json({ ipfsHash: ipfsHash });
   } catch (e) {
     // handle errors
-    return NextResponse.error(e)
+    return NextResponse.json(e)
   }
 }
+
+// turn off bodyParser 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
