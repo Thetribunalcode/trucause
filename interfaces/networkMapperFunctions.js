@@ -39,8 +39,8 @@ const authenticateUser = async (contractInstance, address) => {
 };
 
 const getUserData = (contractInstance, address) => {
-  return contractInstance.usersMapping(address);
-};
+  return contractInstance.userMapping(address);
+}
 
 const checkIfExpired = (eventEndDate) => {
   timestamp(eventEndDate) < timestamp(Date.now()) ? true : false;

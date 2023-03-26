@@ -1,10 +1,18 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import axios from "axios";
 import LandingCard from "@/components/UI/LandingCard";
-import GoBackButton from "@/components/UI/GoBackButton";
+
+const getNGOMetadata = async () => {
+  return await axios.post('/api/ngo/getMetadata');
+}
+
 export default function page() {
+
+  const data = getNGOMetadata();
+
+
   return (
     <>
       <div className='text-banner h-full w-full leading-tight tracking-tight text-center mt-10 font-extrabold font-space z-30 text-white bg-opacity-50 rounded-xl'>

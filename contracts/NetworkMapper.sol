@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -9,7 +9,7 @@ contract NetworkMapper is Ownable {
     mapping(address => string) public NGOToNetworkMapping; // maps each NGO to a particular network, used to authenticate and route the NGO to their chain-specific contract
 
     // location parameter for both ngo and user to match
-    
+
     enum networks {
         filecoinHyperspace,
         gnosis,
@@ -31,8 +31,9 @@ contract NetworkMapper is Ownable {
         uint256 balance;
         string location;
         uint8 age;
-        activityPointers[] listOfRegisteredActivities; 
     }
+
+    mapping(address => activityPointers[]) listOfRegisteredActivitiesForEachUser;
 
     mapping(address => userMetadata) public userMapping; // user metadata for auth and verification
 
@@ -49,15 +50,12 @@ contract NetworkMapper is Ownable {
         contractAddresses["optimism"] = _contractAddresses[3];
     }
 
-    function getNewNetwork () public returns (networks ){
-        networks currentNetwork =  lastNetAssigned;
-        if ( uint(currentNetwork) == 3 )
-        {
+    function getNewNetwork() public returns (networks) {
+        networks currentNetwork = lastNetAssigned;
+        if (uint256(currentNetwork) == 3) {
             lastNetAssigned = (networks.filecoinHyperspace);
-        }
-        else
-        {
-            lastNetAssigned = networks((uint(lastNetAssigned))+1);
+        } else {
+            lastNetAssigned = networks((uint256(lastNetAssigned)) + 1);
         }
         return currentNetwork;
     }
@@ -83,7 +81,23 @@ contract NetworkMapper is Ownable {
         string memory _location,
         address _userAddress
     ) public onlyOwner {
-        activityPointers[] memory set;
-        userMapping[_userAddress] = userMetadata(_name,_balance, _location,_age, set);
+        userMapping[_userAddress] = userMetadata(
+            _name,
+            _balance,
+            _location,
+            _age
+        );
+    }
+
+    function addActivityForUser(
+       address _activityHomeNetwork,
+        uint128 _eventID,
+        address _activitySourceNGO,
+        string memory _lastDateForActivity,
+        address _userAddress
+    ) public onlyOwner {
+        activityPointers memory temp = activityPointers(_activityHomeNetwork,_eventID,_activitySourceNGO, _lastDateForActivity );
+        listOfRegisteredActivitiesForEachUser[_userAddress].push(temp);
     }
 }
+

@@ -1,9 +1,10 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
 import {HyperlaneConnectionClient} from "@hyperlane-xyz/core/contracts/HyperlaneConnectionClient.sol";
 
 contract SubContract is HyperlaneConnectionClient {
+
     // events that NGOs have can be of two types
     enum typeOfEvent {
         shortTermEvent, // 1 or 2 day event
@@ -12,57 +13,59 @@ contract SubContract is HyperlaneConnectionClient {
 
     mapping(address => mapping(uint16 => uint8)) listOfVolunteerHashes; // each volunteer (address), for a particular event is assigned a hash
 
-    // the activity structure that stores metadata about each event
-    struct short_activity {
-        string name; // name of the event
-        string location;
-        uint256 shiftStartTime; // when the shift starts, volunteer clocks in
-        uint256 shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
-    }
-
-    struct long_activity {
-        string name; // name of the event
-        string location;
-        uint256 shiftStartTime; // when the shift starts, volunteer clocks in
-        uint256 shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
-        string startDate;
-        string endDate;
-    }
-
-    long_activity[] long_act;
-    short_activity[] short_act;
-
-    function addShortActivity( string memory name, uint256 shiftStartTime , uint256 shiftEndTime , string memory location ) public {          
-            short_act.push(short_activity(name, location, shiftStartTime , shiftEndTime));
+    // add a short activity for a NGO
+    function addActivity( string memory _name, string memory _shiftStartTime , string memory _shiftEndTime , string memory _startDate, string memory _endDate, string memory _location, address _NGOAddress ) public {          
+        uint128 currentCounter = listOfNGOs[_NGOAddress].lastEventCounter; // free index
+        // set all event metadata
+        listOfNGOs[_NGOAddress].eventName[currentCounter] = _name;
+        listOfNGOs[_NGOAddress].eventLocation[currentCounter] = _location;
+        listOfNGOs[_NGOAddress].shiftStartTime[currentCounter] = _shiftStartTime;
+        listOfNGOs[_NGOAddress].shiftEndTime[currentCounter] = _shiftEndTime;
+        listOfNGOs[_NGOAddress].startDate[currentCounter] = _startDate;
+        listOfNGOs[_NGOAddress].endDate[currentCounter] = _endDate;
+        // increment counter
+        updateEventCounterForNGO(_NGOAddress);
     }
     
-    function getShortActivities() public view returns(short_activity[] memory) {
+    // get activities for a NGO
+    function getActivities(address _NGOAddress) public view returns(NGODetails memory) {
         // check if candidate exists
-        return ( short_act );
+        return (listOfNGOs[_NGOAddress]);
     }
-
-    function addLongActivity( string memory name, uint256 shiftStartTime , uint256 shiftEndTime , string memory location , string memory startDate , string memory endDate ) public {          
-            long_act.push(long_activity(name, location, shiftStartTime , shiftEndTime , startDate , endDate));
-    }
-
-    function getLongActivities() public view returns(long_activity[] memory) {
+    
+    // addVolunteersToAnEventIDForANGO
+    function addVolunteersToAnEventIDForANGO(address _NGOAddress, uint128 _eventID, address _volunteerAddress) public {
         // check if candidate exists
-        return ( long_act );
+        volunteersListForEventIDForANGO[_NGOAddress][_eventID].push(_volunteerAddress);
     }
 
+    
+     mapping(address => mapping(uint128 => address[])) volunteersListForEventIDForANGO;
+  
+    
     // each NGO has some metadata, like the owner address and the list of activities they have
     struct NGODetails {
         string name;
-        short_activity[] short_activities;
-        long_activity[] long_activities;
+        string location;
+        // stuff from the activity struct
+        string[] eventName; // name of the event
+        string[] eventLocation; 
+        string[] shiftStartTime; // when the shift starts, volunteer clocks in
+        string[] shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
+        string[] startDate;
+        string[] endDate;
+         // say max volunteers per event is 15
+        uint128 lastEventCounter; // doubles as eventID
     }
 
     mapping(address => NGODetails) public listOfNGOs; // each NGO (owner address) is mapped to their own metadata and list of events
 
+    // helper function for hyperlane mailbox
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
         return bytes32(uint256(uint160(_addr)));
     }
 
+    // to send NGOMappingToMainContract through hyperlane
     function relayNGOMappingToMainContract(
         uint32 _destination,
         address _recipient,
@@ -72,4 +75,39 @@ contract SubContract is HyperlaneConnectionClient {
         bytes memory _message = abi.encodePacked(_NGOAddress);
         mailbox.dispatch(_destination, addressToBytes32(_recipient), _message);
     }
+
+    // to add or set NGO data
+    function setNGOToContract(
+        string memory _name,
+        string memory _location,
+        address _NGOAddress,
+        string[] memory _temporary
+    ) public {
+        listOfNGOs[_NGOAddress] =  NGODetails(_name, _location, _temporary, _temporary, _temporary, _temporary, _temporary, _temporary, 0);
+    }
+
+    // to increment the counter
+    function updateEventCounterForNGO(
+        address _NGOAddress
+    ) internal {
+        listOfNGOs[_NGOAddress].lastEventCounter += 1;
+    }
+
+    // structure to send back metadata only
+    struct eventDetails {
+        string eventName; // name of the event
+        string eventLocation; 
+        string shiftStartTime; // when the shift starts, volunteer clocks in
+        string shiftEndTime; // when the shift ends, volunteer clocks out, or gets auto-clocked out
+        string startDate;
+        string endDate;
+    }
+
+    // to get complete information for an event given eventID and NGOAddress (for user)
+    function getCompleteInformationOnAnEventUserRegisteredFor(uint128 _eventID, address _NGOAddress) public view returns (eventDetails memory) {
+        NGODetails memory temp = listOfNGOs[_NGOAddress];
+        eventDetails memory returnObj = eventDetails(temp.eventName[_eventID], temp.eventLocation[_eventID],temp.shiftStartTime[_eventID],temp.shiftEndTime[_eventID],temp.startDate[_eventID],temp.endDate[_eventID]);
+        return returnObj;
+    }
+
 }

@@ -1,44 +1,49 @@
 import { useState } from "react";
-import { useAccount } from "wagmi";
-import { useEffect } from "react";
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
 import { useRouter } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import axios from "axios";
 
 export default function Login(props) {
+
   const [type, setType] = useState("volunteer");
+  // chain info
+  const { chain } = useNetwork();
+  const { chains, error, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork()
+  // router obj
   const router = useRouter();
   const selectedTypeStyles =
     "p-4 m-2 text-white text-xl rounded w-full transition duration-500 ease-in-out  ";
 
   const { address, isConnected } = useAccount();
 
-  const [account, setAccount] = useState({
-    address: "0x0",
-    type: "volunteer",
-    network: "ethereum"
-  });;
-
-  // const contractAddress = "0x4801A47dC417FeAC8B557BF785D7e46Bd00D24c5"
-  // const provider = getProviderForNetwork("mumbai");
-  // const contractInstance = contractInstanceReturner(contractAddress, provider);
-
-  useEffect(() => {
-    if (isConnected && account) {
-      console.log(account)
-      // If wallet is already connected, push them to dashboard
+  const verifyChains = () => {
+    if (type === "volunteer" && chain.network !== "maticmum") {
+      // switch to mumbai
+      switchNetwork?.(80001);
     }
-  }, [account]);
+  }
 
-  const handleProceed = () => {
-    setAccount({
-      address: address,
-      type: type,
-      network: "ethereum"
-    });
+  const handleProceed = async () => {
+    // verify if volunteer is on mumbai, if NGO is not on mumbai
+    verifyChains();
+    const res = await axios.get(`/api/authUserOrNGO?network=${chain.network}&address=${address}&type=${type}`);
+    const authStatus = res.data.status;
     if (type === "volunteer") {
-      router.push("/volunteer")
+      if (authStatus === true) {
+        router.push("/volunteer");
+      }
+      else {
+        router.push("/onboarding/volunteer");
+      }
     } else if (type === "ngo") {
-      router.push("/ngo")
+      if (authStatus === true) {
+        router.push("/ngo");
+      }
+      else {
+        router.push("/onboarding/ngo");
+      }
     }
   }
 
@@ -90,7 +95,7 @@ export default function Login(props) {
                 onClick={handleProceed}
                 className={selectedTypeStyles + (type === "ngo" ? "bg-amber-500" : "bg-purple-500")}
               >
-                Proceed
+                Proceed {isLoading && pendingChainId === 80001 && ' (switching)'}
               </button>
 
             }
