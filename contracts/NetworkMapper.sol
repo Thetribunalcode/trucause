@@ -9,16 +9,29 @@ contract NetworkMapper is Ownable {
     mapping(address => string) public NGOToNetworkMapping; // maps each NGO to a particular network, used to authenticate and route the NGO to their chain-specific contract
 
     // location parameter for both ngo and user to match
+    
+    enum networks {
+        filecoinHyperspace,
+        gnosis,
+        scroll,
+        optimism
+    }
+
+    networks lastNetAssigned;
+
 
     struct userMetadata {
         string name;
         uint256 balance;
+        string location;
         uint8 age;
     }
 
     mapping(address => userMetadata) public userMapping; // user metadata for auth and verification
 
     constructor(address[] memory _contractAddresses) {
+        // defining enum for last network
+        lastNetAssigned = networks.filecoinHyperspace;
         // 0 is filecoinHyperspace
         contractAddresses["filecoinHyperspace"] = _contractAddresses[0];
         // 1 is gnosis
@@ -27,6 +40,19 @@ contract NetworkMapper is Ownable {
         contractAddresses["scroll"] = _contractAddresses[2];
         // 3 is optimism
         contractAddresses["optimism"] = _contractAddresses[3];
+    }
+
+    function getNewNetwork () public returns (networks ){
+        networks currentNetwork =  lastNetAssigned;
+        if ( uint(currentNetwork) == 3 )
+        {
+            lastNetAssigned = (networks.filecoinHyperspace);
+        }
+        else
+        {
+            lastNetAssigned = networks((uint(lastNetAssigned))+1);
+        }
+        return currentNetwork;
     }
 
     function changeAddressOfContract(
@@ -47,8 +73,9 @@ contract NetworkMapper is Ownable {
         string memory _name,
         uint8 _age,
         uint256 _balance,
+        string memory _location,
         address _userAddress
     ) public onlyOwner {
-        userMapping[_userAddress] = userMetadata(_name, _balance, _age);
+        userMapping[_userAddress] = userMetadata(_name,_balance, _location,_age);
     }
 }
