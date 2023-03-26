@@ -24,3 +24,5 @@ const rpcUrls = {
 };
 
 module.exports = { networks, rpcUrls };
+
+module.exports = { networks, rpcUrls };
