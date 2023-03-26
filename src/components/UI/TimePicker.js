@@ -36,8 +36,8 @@ export default function TimePicker(props) {
       className='timepicker-ui'
       ref={tmRef}>
       <label
-        for='form1'
-        class='mb-2 mr-44 text-medium font-space text-gray-900 dark:text-white'>
+        htmlFor='form1'
+        className='mb-2 mr-44 text-medium font-space text-gray-900 dark:text-white'>
         {props.time}
       </label>
       <input
@@ -45,6 +45,7 @@ export default function TimePicker(props) {
         type='test'
         className='timepicker-ui-input'
         value={inputValue}
+        readOnly={true}
       />
     </div>
   );

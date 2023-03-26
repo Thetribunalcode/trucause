@@ -11,7 +11,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 export default function Datepicker(props) {
   return (
     <>
-      <div class='mt-4 text-base font-space text-gray-900'>
+      <div className='mt-4 text-base font-space text-gray-900'>
         {props.time}
       </div>
       <DemoContainer components={["DatePicker"]}>
