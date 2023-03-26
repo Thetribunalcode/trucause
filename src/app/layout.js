@@ -13,12 +13,12 @@ import {
   darkTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
+import { filecoinHyperspace, gnosis, polygonMumbai, scrollTestnet, optimismGoerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 // <-------------  setting up rainbow kit ------------->
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum],
+  [filecoinHyperspace, gnosis, polygonMumbai, scrollTestnet, optimismGoerli],
   [publicProvider()]
 );
 

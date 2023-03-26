@@ -8,4 +8,8 @@ const contractInstanceReturner = (address, signerOrProvider) => {
   return subContractInstance;
 }
 
-export { contractInstanceReturner };
+const getNGOMetadata = (contractInstance, address) => {
+  return contractInstance.listOfNGOs(address);
+}
+
+export { contractInstanceReturner, getNGOMetadata };

@@ -134,7 +134,7 @@ export default function Register() {
           <TimePicker getVal={getEndTime} name='endTime' time='Shift End time'></TimePicker>
 
           <div className='flex flex-wrap'>
-            <div class='flex items-center mr-4'>
+            <div className='flex items-center mr-4'>
               <input
                 id='yellow-radio'
                 type='radio'
@@ -142,16 +142,16 @@ export default function Register() {
                 value='long-term'
                 onClick={handleFalsy}
                 name='colored-radio'
-                class='w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                className='w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                 required
               />
               <label
-                for='yellow-radio'
-                class='ml-2 text-sm font-space text-gray-900 dark:text-gray-300'>
+                htmlFor='yellow-radio'
+                className='ml-2 text-sm font-space text-gray-900 dark:text-gray-300'>
                 Long Term ( 1 month &gt; )
               </label>
             </div>
-            <div class='flex items-center mr-4'>
+            <div className='flex items-center mr-4'>
               <input
                 id='orange-radio'
                 type='radio'
@@ -159,12 +159,12 @@ export default function Register() {
                 value='short-term'
                 onChange={handleChange}
                 name='colored-radio'
-                class='w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                className='w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
                 required
               />
               <label
-                for='orange-radio'
-                class='ml-2 text-sm font-space text-gray-900 dark:text-gray-300'>
+                htmlFor='orange-radio'
+                className='ml-2 text-sm font-space text-gray-900 dark:text-gray-300'>
                 Short term
               </label>
             </div>

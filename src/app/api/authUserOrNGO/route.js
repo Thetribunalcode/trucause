@@ -7,8 +7,10 @@ const mainContractAddress = process.env.NEXT_PUBLIC_MAIN_CONTRACT_ADDRESS;
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const network = searchParams.get('network'); // will be one of the l2 chains
-  const type = searchParams.get('type'); // type can be NGO or User (volunteer)
+  let network = searchParams.get('network'); // will be one of the l2 chains
+  network = network === "maticmum" ? "mumbai" : network;
+  let type = searchParams.get('type'); // type can be NGO or User (volunteer)
+  type = type === "volunteer" ? "user" : type;
   const address = searchParams.get('address'); // type can be NGO or User (volunteer)
   // to get instance of main contract
   const signer = getSignerForNetwork("mumbai", null);
