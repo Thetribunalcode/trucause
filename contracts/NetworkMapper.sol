@@ -19,12 +19,19 @@ contract NetworkMapper is Ownable {
 
     networks lastNetAssigned;
 
+    struct activityPointers {
+        address activityHomeNetwork;
+        uint128 eventID;
+        address activitySourceNGO;
+        string lastDateForActivity;
+    }
 
     struct userMetadata {
         string name;
         uint256 balance;
         string location;
         uint8 age;
+        activityPointers[] listOfRegisteredActivities; 
     }
 
     mapping(address => userMetadata) public userMapping; // user metadata for auth and verification
@@ -76,6 +83,7 @@ contract NetworkMapper is Ownable {
         string memory _location,
         address _userAddress
     ) public onlyOwner {
-        userMapping[_userAddress] = userMetadata(_name,_balance, _location,_age);
+        activityPointers[] memory set;
+        userMapping[_userAddress] = userMetadata(_name,_balance, _location,_age, set);
     }
 }
