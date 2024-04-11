@@ -2,8 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
-import LandingCard from "@/components/UI/LandingCard";
-axios.post(`/api/ngo/getMetadata?address=${address}`);
+import LandingCard from "../../components/UI/LandingCard";
+// axios.post(`/api/ngo/getMetadata?address=${address}`);
 export default function page() {
   return (
     <>

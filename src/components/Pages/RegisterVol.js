@@ -19,7 +19,7 @@ export default function Register() {
       <div className='w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
         <form
           className='space-y-6 '
-          action='#'>
+          action='/volunteer'>
           <h5 className='text-2xl font-space text-gray-900 dark:text-white'>
             Please enter your details
           </h5>

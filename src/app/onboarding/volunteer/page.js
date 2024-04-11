@@ -20,7 +20,7 @@ export default function Page() {
              
               
            <Image
-          src='/register.png'
+          src='/register.jpg'
           height={500}
           width={500}
             alt='dummy'

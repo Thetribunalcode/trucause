@@ -2,9 +2,9 @@
 
 import React from "react";
 import Register from "../../../components/Pages/Register";
-import GoBackButton from "@/components/UI/GoBackButton";
+import GoBackButton from "../../../components/UI/GoBackButton";
 import Image from "next/image";
-import UploadTest from "../../../components/Pages/UploadTest";
+
 
 export default function page() {
 
@@ -17,7 +17,7 @@ export default function page() {
           </div>
           <Register />
         </div>
-        <Image src="/register.png" height={500} width={500} alt="" />
+        <Image src="/register.jpg" height={500} width={500} alt="" />
       </div>
     </>
   );

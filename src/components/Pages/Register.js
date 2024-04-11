@@ -100,7 +100,7 @@ export default function Register() {
       <div className='w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8'>
         <form onSubmit={handleSubmit}
           className ='space-y-6 '
-          action='#'>
+          action='/ngo/dashboard'>
           <h5 className='text-2xl font-space text-gray-900 dark:text-white'>
             Add a new activity
           </h5>

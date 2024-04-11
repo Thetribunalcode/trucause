@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import {HyperlaneConnectionClient} from "@hyperlane-xyz/core/contracts/HyperlaneConnectionClient.sol";
-
-contract SubContract is HyperlaneConnectionClient {
+contract SubContract {
 
     // events that NGOs have can be of two types
     enum typeOfEvent {
@@ -63,17 +61,6 @@ contract SubContract is HyperlaneConnectionClient {
     // helper function for hyperlane mailbox
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
         return bytes32(uint256(uint160(_addr)));
-    }
-
-    // to send NGOMappingToMainContract through hyperlane
-    function relayNGOMappingToMainContract(
-        uint32 _destination,
-        address _recipient,
-        address _NGOAddress
-    ) external {
-        // so that the main contract can keep track of where each NGO is, i.e, which chain some particular NGO's information is
-        bytes memory _message = abi.encodePacked(_NGOAddress);
-        mailbox.dispatch(_destination, addressToBytes32(_recipient), _message);
     }
 
     // to add or set NGO data

@@ -2,7 +2,7 @@
 
 import React from "react";
 import axios from "axios";
-import LandingCard from "@/components/UI/LandingCard";
+import LandingCard from "../../components/UI/LandingCard";
 
 const getNGOMetadata = async () => {
   return await axios.post('/api/ngo/getMetadata');

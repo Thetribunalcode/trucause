@@ -2,11 +2,13 @@
 
 import React from "react";
 import Image from "next/image";
-import LandingCard from "@/components/UI/LandingCard";
+import LandingCard from "../../../components/UI/LandingCard";
+import GoBackButton from "../../../components/UI/GoBackButton";
 import json from "../../activities/metadata.json";
 export default function page() {
   return (
     <>
+    <GoBackButton />
       <div className='text-7xl h-full w-full leading-tight tracking-tight text-center mt-10 font-extrabold font-space z-30 text-white bg-opacity-50 rounded-xl'>
         Your Activities
       </div>
